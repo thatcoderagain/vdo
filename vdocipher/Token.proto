@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message Token {
+    string apiKeyId = 1;
+    string videoId = 2;
+    string policyId = 3;
+    string ip=4;
+    string userId = 5;
+    repeated string watermarkValues = 6;
+    uint32 iat=7;
+}
