@@ -9,15 +9,14 @@
             "email": "gaurav.officialsites@gmail.com"
         }
     ],
-    "psr-4": {
-        "thatcoderagain\\vdocipher\\": "vdocipher/"
+    "autoload": {
+        "psr-4": {
+            "thatcoderagain\\vdocipher\\": "vdocipher/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable" : true,
     "require": {
-        "protobuf-php/protobuf": "^0.1.3",
-        "protobuf-php/protobuf-plugin": "^0.1.3",
-        "google/protobuf": "^3.25",
-        "paragonie/sodium_compat": "^1.20"
+        "google/protobuf": "^3.25"
     }
 }
