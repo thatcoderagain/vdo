@@ -2,7 +2,6 @@
 
 namespace Vdocipher;
 
-require_once 'vendor/autoload.php';
 require_once __DIR__.'/GPBMetadata/Token.php';
 require_once __DIR__.'/Token.php';
 
@@ -11,7 +10,7 @@ class Playback {
 
     private $token = null;
 
-    const PAYLOAD_KEYS = ['apiKeyId', 'videoId', 'policyId', 'ip', 'userId', 'watermarkValues', 'iat'];
+    const PAYLOAD_FIELDS = ['apiKeyId', 'videoId', 'policyId', 'ip', 'userId', 'watermarkValues', 'iat'];
 
     const MANDATORY_FIELDS = [true, true, false, false, false, false, true];
 
@@ -43,15 +42,15 @@ class Playback {
     public function setPayload(array $data = NULL)
     {
         if ($data) {
-            foreach (static::PAYLOAD_KEYS as $index => $key) {
+            foreach (static::PAYLOAD_FIELDS as $index => $key) {
                 if (!isset($data[$key]) && static::MANDATORY_FIELDS[$index]) {
                     throw new \Exception("Missing key '$key' in data");
                 }
             }
-            $data[static::PAYLOAD_KEYS[0]] = substr($data[static::PAYLOAD_KEYS[0]], 0, 16);
-            $data[static::PAYLOAD_KEYS[1]] = $this->stringToBytesArray($data[static::PAYLOAD_KEYS[1]]);
-            if (isset($data[static::PAYLOAD_KEYS[2]])) {
-                $data[static::PAYLOAD_KEYS[2]] = $this->stringToBytesArray($data[static::PAYLOAD_KEYS[2]]);
+            $data[static::PAYLOAD_FIELDS[0]] = substr($data[static::PAYLOAD_FIELDS[0]], 0, 16);
+            $data[static::PAYLOAD_FIELDS[1]] = $this->stringToBytesArray($data[static::PAYLOAD_FIELDS[1]]);
+            if (isset($data[static::PAYLOAD_FIELDS[2]])) {
+                $data[static::PAYLOAD_FIELDS[2]] = $this->stringToBytesArray($data[static::PAYLOAD_FIELDS[2]]);
             }
             $this->token = new \Token($data);
         } else {
