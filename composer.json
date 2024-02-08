@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "thatcoderagain\\vdocipher\\": "vdocipher/"
+            "Vdocipher\\": "src/"
         }
     },
     "minimum-stability": "dev",

@@ -1,2 +1,2 @@
 # start the server
-php -S localhost:8080 ./Sample/app.php
+php -S localhost:8000 ./Sample/app.php

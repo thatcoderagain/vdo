@@ -2,7 +2,7 @@
 
 namespace Sample;
 
-require_once __DIR__. '/../vdocipher/Playback.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 function renderVideo($apiKey, $videoId, $data) {
     $vdocipher = new \Vdocipher\Playback($apiKey, $data);

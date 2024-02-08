@@ -2,7 +2,7 @@
 
 namespace Vdocipher;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 require_once __DIR__.'/GPBMetadata/Token.php';
 require_once __DIR__.'/Token.php';
 
@@ -93,6 +93,6 @@ class Playback {
 
     private function stringToBytesArray($string)
     {
-        return hex2bin($string);// unpack("H*",bin2hex($string))[1];
+        return hex2bin($string);
     }
 }
