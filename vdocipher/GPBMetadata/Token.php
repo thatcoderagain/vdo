@@ -16,18 +16,17 @@ class Token
         }
         $pool->internalAddGeneratedFile(
             '
-ï¿½
+•
 Token.proto"~
 Token
 apiKeyId (	
-videoId (	
-policyId (	
+videoId (
+policyId (
 
 ip (	
 userId (	
 watermarkValues (	
-iat (
-bproto3'
+iat (bproto3'
         , true);
 
         static::$is_initialized = true;

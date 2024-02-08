@@ -16,11 +16,11 @@ class Token extends \Google\Protobuf\Internal\Message
      */
     protected $apiKeyId = '';
     /**
-     * Generated from protobuf field <code>string videoId = 2;</code>
+     * Generated from protobuf field <code>bytes videoId = 2;</code>
      */
     protected $videoId = '';
     /**
-     * Generated from protobuf field <code>string policyId = 3;</code>
+     * Generated from protobuf field <code>bytes policyId = 3;</code>
      */
     protected $policyId = '';
     /**
@@ -83,7 +83,7 @@ class Token extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string videoId = 2;</code>
+     * Generated from protobuf field <code>bytes videoId = 2;</code>
      * @return string
      */
     public function getVideoId()
@@ -92,20 +92,20 @@ class Token extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string videoId = 2;</code>
+     * Generated from protobuf field <code>bytes videoId = 2;</code>
      * @param string $var
      * @return $this
      */
     public function setVideoId($var)
     {
-        GPBUtil::checkString($var, True);
+        GPBUtil::checkString($var, False);
         $this->videoId = $var;
 
         return $this;
     }
 
     /**
-     * Generated from protobuf field <code>string policyId = 3;</code>
+     * Generated from protobuf field <code>bytes policyId = 3;</code>
      * @return string
      */
     public function getPolicyId()
@@ -114,13 +114,13 @@ class Token extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * Generated from protobuf field <code>string policyId = 3;</code>
+     * Generated from protobuf field <code>bytes policyId = 3;</code>
      * @param string $var
      * @return $this
      */
     public function setPolicyId($var)
     {
-        GPBUtil::checkString($var, True);
+        GPBUtil::checkString($var, False);
         $this->policyId = $var;
 
         return $this;
