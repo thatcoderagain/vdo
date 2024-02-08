@@ -21,17 +21,18 @@ function renderVideo($apiKey, $videoId, $data) {
     return [$token, $iframe];
 }
 
+
 # Sample Payload Array
 $key = 'HOJmGTj4sy5MJt2EC5FVtJ3jpUq5KiGWLW2EXcJRC9xbNagoykOFaudsHKaq0CVY';
 $videoId         = '0989fbb847ed4cb195788df42f608db4';
-$data = [
+
+
+echo renderVideo($key, $videoId, [
     'apiKeyId'        => substr($key, 0, 16),
     'videoId'         => $videoId,
-//    'policyId'        => $policyId, // optional
-//    'ip'              => $ip, // optional
-//    'userId'          => $userId, // optional
-//    'watermarkValues' => [], // optional
+    //    'policyId'        => $policyId, // optional
+    //    'ip'              => $ip, // optional
+    //    'userId'          => $userId, // optional
+    //    'watermarkValues' => [], // optional
     'iat'             => time(),
-];
-
-echo renderVideo($key, $videoId, $data)[1];
+])[1];
