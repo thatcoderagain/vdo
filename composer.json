@@ -1,5 +1,5 @@
 {
-    "name": "thatcoderagain/vdocipher",
+    "name": "thatcoderagain/vdo",
     "description": "This package provides the methods to generate jwt token for video playback",
     "type": "library",
     "license": "MIT",
