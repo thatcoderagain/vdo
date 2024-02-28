@@ -10,13 +10,16 @@ class Playback {
 
     private $token = null;
 
-    const PAYLOAD_FIELDS = ['apiKeyId', 'videoId', 'policyId', 'ip', 'userId', 'watermarkValues', 'iat'];
+    const MANDATORY_FIELDS = [
+        'apiKeyId' => true,
+        'videoId' => true,
+        'policyId' => false,
+        'ip' => false,
+        'userId' => false,
+        'watermarkValues' => false,
+        'iat' => true
+    ];
 
-    const MANDATORY_FIELDS = [true, true, false, false, false, false, true];
-
-    /**
-     * @throws \Exception
-     */
     public function __construct(string $apiKey = NULL, array $data = NULL)
     {
         $this->setKey($apiKey);
@@ -37,20 +40,26 @@ class Playback {
     /**
      * @param array|NULL $data
      * @return void
-     * @throws \Exception
+     * @throws \UnexpectedValueException
      */
-    public function setPayload(array $data = NULL)
+    public function setPayload(array $data = NULL): void
     {
         if ($data) {
-            foreach (static::PAYLOAD_FIELDS as $index => $key) {
-                if (!isset($data[$key]) && static::MANDATORY_FIELDS[$index]) {
-                    throw new \Exception("Missing key '$key' in data");
+            foreach (static::MANDATORY_FIELDS as $key => $isRequired) {
+                if (!isset($data[$key]) && $isRequired) {
+                    throw new \UnexpectedValueException("Missing key '$key' in data");
                 }
             }
-            $data[static::PAYLOAD_FIELDS[0]] = substr($data[static::PAYLOAD_FIELDS[0]], 0, 16);
-            $data[static::PAYLOAD_FIELDS[1]] = $this->stringToBytesArray($data[static::PAYLOAD_FIELDS[1]]);
-            if (isset($data[static::PAYLOAD_FIELDS[2]])) {
-                $data[static::PAYLOAD_FIELDS[2]] = $this->stringToBytesArray($data[static::PAYLOAD_FIELDS[2]]);
+            if (!preg_match("/[0-9a-f]{32}/i", $data['videoId'])) {
+                throw new \UnexpectedValueException('Vdocipher Error: Invalid video ID');
+            }
+            if (!empty($data['policyId']) && !preg_match("/[0-9a-f]{8}((-[0-9a-f]{4}){3})(-[0-9a-f]{12})/i", $data['policyId'])) {
+                throw new \UnexpectedValueException('Vdocipher Error: Invalid policy ID');
+            }
+            $data['apiKeyId'] = substr($data['apiKeyId'], 0, 16);
+            $data['videoId'] = $this->stringToBytesArray($data['videoId']);
+            if (isset($data['policyId'])) {
+                $data['policyId'] = $this->stringToBytesArray($data['policyId']);
             }
             $this->token = new \Token($data);
         } else {
@@ -59,9 +68,10 @@ class Playback {
     }
 
     /**
+     * @return string
      * @throws \Exception
      */
-    public function getToken()
+    public function getToken(): string
     {
         if ($this->token === NULL) {
             throw new \Exception('Missing Token payload.');
